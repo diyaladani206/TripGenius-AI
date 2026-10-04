@@ -10,6 +10,7 @@ import {
 import "leaflet/dist/leaflet.css";
 
 import L from "leaflet";
+import { FaMapMarkedAlt } from "react-icons/fa";
 
 // Fix Leaflet marker icons in React/Vite
 delete L.Icon.Default.prototype._getIconUrl;
@@ -76,10 +77,11 @@ function MapCard({ destination }) {
   }, [destination]);
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
-      <h2 className="text-2xl font-bold text-slate-800 mb-4">
-        🗺️ Explore {destination}
+      <h2 className="mb-4 flex items-center gap-3 text-xl font-bold text-slate-900">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700"><FaMapMarkedAlt aria-hidden="true" /></span>
+        Explore {destination}
       </h2>
 
       {loading && (
@@ -119,7 +121,7 @@ function MapCard({ destination }) {
               <Popup>
                 <strong>{destination}</strong>
                 <br />
-                Your selected destination 📍
+                Your selected destination
               </Popup>
             </Marker>
 

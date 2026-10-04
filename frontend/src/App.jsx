@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Dashboard from "./pages/Dashboard";
 import TripResults from "./pages/TripResults";
 import MyTrips from "./pages/MyTrips";
+import Profile from "./pages/Profile";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { Navigate } from "react-router-dom";
@@ -32,10 +33,11 @@ function App() {
 
         <Route
           path="/trip-results"
-          element={<TripResults />}
+          element={<ProtectedRoute><TripResults /></ProtectedRoute>}
         />
           <Route path="/saved" element={<ProtectedRoute><Navigate to="/my-trips" replace /></ProtectedRoute>} />
           <Route path="/my-trips" element={<ProtectedRoute><MyTrips /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

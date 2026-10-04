@@ -3,6 +3,8 @@ import {
   FaMapMarkedAlt,
   FaCloudSun,
   FaMoneyBillWave,
+  FaSlidersH,
+  FaCompass,
 } from "react-icons/fa";
 
 const features = [
@@ -26,19 +28,31 @@ const features = [
   },
   {
     icon: <FaMoneyBillWave />,
-    title: "Budget Planner",
+    title: "Budget-aware Recommendations",
     description:
       "Estimate travel expenses and stay within your planned budget.",
+  },
+  {
+    icon: <FaSlidersH />,
+    title: "Travel-style Recommendations",
+    description:
+      "Shape each itinerary around the way you like to explore.",
+  },
+  {
+    icon: <FaCompass />,
+    title: "Personalized Planning",
+    description:
+      "Bring dates, travelers and destination preferences into one plan.",
   },
 ];
 
 function AIFeatures() {
   return (
-    <section className="py-24 bg-gray-100">
+    <section className="bg-slate-50 py-20 sm:py-24">
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold">
+          <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl">
             Powerful AI Features
           </h2>
 
@@ -47,21 +61,21 @@ function AIFeatures() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 auto-rows-fr gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="bg-white rounded-3xl shadow-lg p-8 hover:shadow-2xl hover:-translate-y-2 transition duration-300"
+              className="flex h-full min-w-0 flex-col rounded-2xl border border-slate-200/80 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8"
             >
-              <div className="text-5xl text-blue-600 mb-5">
+              <div className="mb-5 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-2xl text-blue-700">
                 {feature.icon}
               </div>
 
-              <h3 className="text-2xl font-bold mb-3">
+              <h3 className="mb-3 min-h-14 text-xl font-bold text-slate-900">
                 {feature.title}
               </h3>
 
-              <p className="text-gray-600">
+              <p className="flex-1 text-gray-600">
                 {feature.description}
               </p>
             </div>

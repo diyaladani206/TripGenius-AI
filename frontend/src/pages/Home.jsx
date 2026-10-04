@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import SearchBox from "../components/SearchBox";
@@ -10,6 +12,17 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 
 function Home() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const sectionId = location.hash.slice(1);
+    if (!sectionId) return;
+
+    requestAnimationFrame(() => {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    });
+  }, [location.hash]);
+
   return (
     <>
       <Navbar />

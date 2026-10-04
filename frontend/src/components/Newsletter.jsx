@@ -1,35 +1,41 @@
 import { FaPaperPlane } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function Newsletter() {
+  const navigate = useNavigate();
+
   return (
-    <section className="py-24 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+    <section className="bg-gradient-to-r from-blue-50 via-white to-teal-50 py-20 sm:py-24">
 
       <div className="max-w-4xl mx-auto px-6 text-center">
 
-        <h2 className="text-5xl font-bold mb-6">
-          Ready to Plan Your Dream Vacation?
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-teal-700">Travel notes, thoughtfully curated</p>
+        <h2 className="mb-5 text-3xl font-extrabold text-slate-900 sm:text-4xl md:text-5xl">
+          Get Travel Inspiration
         </h2>
 
-        <p className="text-xl text-blue-100 mb-10">
-          Join thousands of travelers using AI to create unforgettable trips.
+        <p className="mb-9 text-base leading-7 text-slate-600 sm:text-lg">
+          Ideas and destination inspiration for wherever you want to go next.
         </p>
 
-        <div className="flex flex-col md:flex-row gap-4 justify-center">
+        <form onSubmit={(event) => { event.preventDefault(); navigate("/register"); }} className="mx-auto flex max-w-2xl flex-col justify-center gap-3 sm:flex-row sm:gap-4">
 
           <input
             type="email"
             placeholder="Enter your email"
-            className="px-6 py-4 rounded-xl text-gray-800 w-full md:w-96 outline-none"
+            aria-label="Email address"
+            required
+            className="w-full rounded-xl border border-slate-300 bg-white px-5 py-4 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 sm:max-w-md"
           />
 
           <button
-            className="bg-white text-blue-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition flex items-center justify-center gap-2"
+            type="submit"
+            className="flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-8 py-4 font-semibold text-white shadow-sm transition hover:bg-blue-700"
           >
             <FaPaperPlane />
-            Get Started
+            Subscribe
           </button>
-
-        </div>
+        </form>
 
       </div>
 

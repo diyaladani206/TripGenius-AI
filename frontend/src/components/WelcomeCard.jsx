@@ -1,116 +1,31 @@
-import { useEffect, useState } from "react";
-import { getWeather } from "../services/weatherService";
+import { FaArrowRight, FaCompass } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
-function WeatherCard({ destination }) {
-  const [weather, setWeather] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    async function loadWeather() {
-      if (!destination) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        setLoading(true);
-        setError("");
-
-        const data = await getWeather(destination);
-
-        setWeather(data);
-      } catch (err) {
-        console.error(err);
-        setError("Unable to load weather.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadWeather();
-  }, [destination]);
+function WelcomeCard() {
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6">
-
-      <h2 className="text-2xl font-bold mb-6">
-        🌤 Current Weather
-      </h2>
-
-      {/* Loading */}
-      {loading && (
-        <p className="text-gray-500">
-          Loading weather...
+    <section className="flex flex-col justify-between gap-6 rounded-2xl border border-blue-100 bg-gradient-to-r from-blue-50 via-white to-teal-50 p-6 sm:flex-row sm:items-center sm:p-8">
+      <div>
+        <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">Your travel workspace</p>
+        <h1 className="mt-2 text-2xl font-extrabold text-slate-900 sm:text-3xl">
+          Welcome{currentUser?.fullName ? `, ${currentUser.fullName.split(" ")[0]}` : " back"}
+        </h1>
+        <p className="mt-2 max-w-xl leading-6 text-slate-600">
+          Shape your next trip around the places, pace and experiences you love.
         </p>
-      )}
-
-      {/* Error */}
-      {!loading && error && (
-        <p className="text-red-500">
-          {error}
-        </p>
-      )}
-
-      {/* Weather */}
-      {!loading && weather && (
-        <div>
-
-          <h3 className="text-3xl font-bold">
-            {weather.city}
-          </h3>
-
-          <div className="flex items-center gap-4 mt-4">
-
-            <img
-              src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
-              alt={weather.description}
-              className="w-20 h-20"
-            />
-
-            <div>
-              <p className="text-5xl font-bold text-blue-600">
-                {weather.temperature}°C
-              </p>
-
-              <p className="text-gray-600 capitalize">
-                {weather.description}
-              </p>
-            </div>
-
-          </div>
-
-          <hr className="my-5" />
-
-          <div className="grid grid-cols-2 gap-4">
-
-            <div className="bg-slate-50 p-4 rounded-xl">
-              <p className="text-gray-500 text-sm">
-                Humidity
-              </p>
-
-              <p className="font-bold text-lg">
-                💧 {weather.humidity}%
-              </p>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-xl">
-              <p className="text-gray-500 text-sm">
-                Wind
-              </p>
-
-              <p className="font-bold text-lg">
-                🌬 {weather.wind} km/h
-              </p>
-            </div>
-
-          </div>
-
-        </div>
-      )}
-
-    </div>
+      </div>
+      <button
+        type="button"
+        onClick={() => navigate("/my-trips")}
+        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-5 py-3 text-sm font-bold text-blue-700 transition hover:border-blue-500 hover:bg-blue-50"
+      >
+        <FaCompass aria-hidden="true" /> Your trips <FaArrowRight aria-hidden="true" />
+      </button>
+    </section>
   );
 }
 
-export default WeatherCard;
+export default WelcomeCard;

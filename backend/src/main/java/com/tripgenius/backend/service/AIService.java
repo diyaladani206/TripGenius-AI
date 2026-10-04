@@ -21,8 +21,9 @@ public AIService() {
     this.objectMapper = new ObjectMapper();
 }
 
+
     public List<ItineraryResponse.DayPlan> generateItinerary(
-            String destination,
+            String destination, 
             String startDate,
             String endDate,
             int travelers,

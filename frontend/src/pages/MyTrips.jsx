@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaCalendarAlt, FaMapMarkerAlt, FaPencilAlt, FaTrashAlt, FaUsers, FaWallet, FaSuitcase } from "react-icons/fa";
 import { deleteTrip, getMyTrips } from "../services/tripService";
+import DashboardNavbar from "../components/DashboardNavbar";
 
 function MyTrips() {
   const navigate = useNavigate();
@@ -25,32 +27,14 @@ function MyTrips() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100">
-
-      {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-
-          <h1 className="text-2xl font-bold text-blue-600">
-            ✈️ TripGenius AI
-          </h1>
-
-          <button
-            onClick={() => navigate("/dashboard")}
-            className="text-gray-700 hover:text-blue-600 font-medium"
-          >
-            ← Dashboard
-          </button>
-
-        </div>
-      </div>
+    <div className="min-h-screen bg-slate-50">
+      <DashboardNavbar />
 
       {/* Content */}
-      <main className="max-w-7xl mx-auto p-8">
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
 
-        <h1 className="text-4xl font-bold text-slate-800">
-          🧳 My Trips
-        </h1>
+        <p className="text-xs font-bold uppercase tracking-[0.16em] text-teal-700">Your travel library</p>
+        <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">My Trips</h1>
 
         <p className="text-gray-500 mt-2">
           View and manage your travel plans.
@@ -61,86 +45,85 @@ function MyTrips() {
 
         {!loading && !error && trips.length === 0 ? (
 
-          <div className="bg-white rounded-2xl shadow-sm p-12 mt-8 text-center">
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm sm:p-12">
 
-            <div className="text-6xl">
-              🌍
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-2xl text-teal-700">
+              <FaSuitcase aria-hidden="true" />
             </div>
 
-            <h2 className="text-2xl font-bold mt-5">
+            <h2 className="mt-5 text-2xl font-bold text-slate-900">
               No Trips Yet
             </h2>
 
-            <p className="text-gray-500 mt-2">
+            <p className="mt-2 text-slate-600">
               Start planning your first adventure.
             </p>
 
             <button
               onClick={() => navigate("/dashboard")}
-              className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold"
+              className="mt-6 rounded-xl bg-blue-600 px-6 py-3 font-bold text-white transition hover:bg-blue-700"
             >
-              ✨ Plan a Trip
+              Plan a Trip
             </button>
 
           </div>
 
         ) : !loading && trips.length > 0 ? (
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
 
             {trips.map((trip) => (
 
               <div
                 key={trip.id}
-                className="bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-lg"
               >
 
-                <div className="text-4xl">
-                  🌍
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex min-w-0 items-center gap-3">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700"><FaMapMarkerAlt aria-hidden="true" /></span>
+                    <h2 className="truncate text-xl font-bold text-slate-900">{trip.destination}</h2>
+                  </div>
+                  <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-800">{trip.travelStyle}</span>
                 </div>
 
-                <h2 className="text-2xl font-bold text-slate-800 mt-4">
-                  {trip.destination}
-                </h2>
-
-                <p className="text-gray-500 mt-2">
-                  📅 {trip.startDate} → {trip.endDate}
+                <p className="mt-4 flex items-center gap-2 text-sm text-slate-600">
+                  <FaCalendarAlt className="text-teal-700" aria-hidden="true" />
+                  {trip.startDate} <span aria-hidden="true">to</span> {trip.endDate}
                 </p>
 
-                <div className="mt-5 space-y-2 text-gray-700">
-
-                  <p>
-                    💰 <strong>Budget:</strong>{" "}
-                    ₹{Number(trip.budget).toLocaleString("en-IN")}
+                <div className="mt-5 grid grid-cols-2 gap-3 border-y border-slate-100 py-4">
+                  <p className="flex items-center gap-2 text-sm text-slate-600">
+                    <FaWallet className="text-blue-700" aria-hidden="true" />
+                    <span>₹{Number(trip.budget).toLocaleString("en-IN")}</span>
                   </p>
-
-                  <p>
-                    👥 <strong>Travelers:</strong>{" "}
-                    {trip.travelers}
+                  <p className="flex items-center gap-2 text-sm text-slate-600">
+                    <FaUsers className="text-blue-700" aria-hidden="true" />
+                    <span>{trip.travelers} travelers</span>
                   </p>
-
-                  <p>
-                    🎯 <strong>Style:</strong>{" "}
-                    {trip.travelStyle}
-                  </p>
-
                 </div>
 
-                <button
-                  onClick={() => navigate("/trip-results", {
-                    state: { trip, itinerary: { itinerary: trip.itinerary } },
-                  })}
-                  className="flex-1 mt-6 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold"
-                >
-                  View Trip →
-                </button>
-                <button
-                  onClick={() => handleDelete(trip.id)}
-                  className="mt-6 border border-red-500 text-red-600 hover:bg-red-50 px-4 py-3 rounded-xl font-semibold"
-                  aria-label={`Delete trip to ${trip.destination}`}
-                >
-                  Delete
-                </button>
+                <div className="mt-4 grid grid-cols-3 gap-2">
+                  <button
+                    onClick={() => navigate("/trip-results", { state: { trip, itinerary: { itinerary: trip.itinerary } } })}
+                    className="rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-bold text-white transition hover:bg-blue-700"
+                  >
+                    View Trip
+                  </button>
+                  <button
+                    onClick={() => navigate("/dashboard", { state: { trip } })}
+                    className="inline-flex items-center justify-center gap-1 rounded-lg border border-slate-300 px-2 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-teal-500 hover:text-teal-800"
+                  >
+                    <FaPencilAlt aria-hidden="true" /> Modify
+                  </button>
+                  <button
+                    onClick={() => handleDelete(trip.id)}
+                    className="inline-flex items-center justify-center gap-1 rounded-lg border border-red-200 px-2 py-2.5 text-sm font-semibold text-red-700 transition hover:bg-red-50"
+                    aria-label={`Delete trip to ${trip.destination}`}
+                  >
+                    <FaTrashAlt aria-hidden="true" /> Delete
+                  </button>
+                </div>
 
               </div>
 

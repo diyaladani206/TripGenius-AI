@@ -1,42 +1,44 @@
-    function BudgetCard({ budget }) {
+  import { FaCar, FaEllipsisH, FaHotel, FaTicketAlt, FaUtensils } from "react-icons/fa";
+
+  function BudgetCard({ budget }) {
   const totalBudget = Number(budget) || 0;
 
   const breakdown = [
     {
       name: "Accommodation",
-      icon: "🏨",
+      icon: <FaHotel />,
       percentage: 40,
     },
     {
       name: "Food",
-      icon: "🍽️",
+      icon: <FaUtensils />,
       percentage: 20,
     },
     {
       name: "Transportation",
-      icon: "🚗",
+      icon: <FaCar />,
       percentage: 15,
     },
     {
       name: "Activities",
-      icon: "🎯",
+      icon: <FaTicketAlt />,
       percentage: 15,
     },
     {
       name: "Miscellaneous",
-      icon: "🛍️",
+      icon: <FaEllipsisH />,
       percentage: 10,
     },
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
       <div className="flex items-center justify-between mb-6">
 
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">
-            💰 Budget Breakdown
+          <h2 className="text-xl font-bold text-slate-900">
+            Budget Breakdown
           </h2>
 
           <p className="text-gray-500 mt-1">
@@ -68,8 +70,8 @@
 
               <div className="flex justify-between mb-2">
 
-                <span className="font-semibold text-gray-700">
-                  {item.icon} {item.name}
+                <span className="font-semibold text-slate-700">
+                  <span className="mr-2 text-teal-700" aria-hidden="true">{item.icon}</span>{item.name}
                 </span>
 
                 <span className="font-semibold text-slate-800">
@@ -78,10 +80,10 @@
 
               </div>
 
-              <div className="w-full bg-gray-200 rounded-full h-3">
+              <div className="h-2.5 w-full rounded-full bg-slate-100">
 
                 <div
-                  className="bg-blue-600 h-3 rounded-full transition-all"
+                  className="h-2.5 rounded-full bg-teal-500 transition-all"
                   style={{
                     width: `${item.percentage}%`,
                   }}

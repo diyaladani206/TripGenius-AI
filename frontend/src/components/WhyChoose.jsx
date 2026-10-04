@@ -1,46 +1,46 @@
 import {
   FaRobot,
   FaWallet,
-  FaGlobeAsia,
-  FaBolt
+  FaCloudSun,
+  FaUserFriends,
 } from "react-icons/fa";
 
 const features = [
   {
     icon: <FaRobot />,
-    title: "AI Powered",
+    title: "AI-Powered Planning",
     description:
       "Generate personalized travel itineraries using Artificial Intelligence."
   },
   {
+    icon: <FaCloudSun />,
+    title: "Smart Travel Insights",
+    description:
+      "Bring weather, maps and practical details together before you go."
+  },
+  {
     icon: <FaWallet />,
-    title: "Budget Friendly",
+    title: "Budget-Friendly Planning",
     description:
       "Plan trips that match your budget without compromising experiences."
   },
   {
-    icon: <FaGlobeAsia />,
-    title: "Personalized Trips",
+    icon: <FaUserFriends />,
+    title: "Personalized Experiences",
     description:
-      "Recommendations based on your interests, travel style and preferences."
-  },
-  {
-    icon: <FaBolt />,
-    title: "Instant Planning",
-    description:
-      "Create a complete travel plan within seconds."
+      "Recommendations shaped around your interests and travel style."
   }
 ];
 
 function WhyChoose() {
   return (
-    <section className="py-24 bg-white">
+    <section id="about" className="bg-white py-20 sm:py-24">
 
       <div className="max-w-7xl mx-auto px-6">
 
         <div className="text-center mb-16">
 
-          <h2 className="text-5xl font-bold">
+          <h2 className="text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl">
             Why Choose TripGenius AI?
           </h2>
 
@@ -56,13 +56,13 @@ function WhyChoose() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="rounded-3xl bg-gray-50 p-8 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-300"
+                className="rounded-2xl border border-slate-200/80 bg-slate-50 p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl sm:p-8"
             >
-              <div className="text-5xl text-blue-600 mb-6">
+              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50 text-2xl text-teal-700">
                 {feature.icon}
               </div>
 
-              <h3 className="text-2xl font-bold mb-4">
+              <h3 className="mb-3 text-xl font-bold text-slate-900">
                 {feature.title}
               </h3>
 

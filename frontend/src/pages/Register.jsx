@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaUser,
   FaEnvelope,
@@ -13,6 +13,7 @@ import { useAuth } from "../hooks/useAuth";
 
 function Register() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { register } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -47,7 +48,10 @@ function Register() {
     setSubmitting(true);
     try {
       await register(formData);
-      navigate("/dashboard", { replace: true });
+      navigate(location.state?.from?.pathname || "/dashboard", {
+        replace: true,
+        state: location.state?.from?.state,
+      });
     } catch (requestError) {
       setError(requestError.message);
     } finally {
@@ -57,30 +61,30 @@ function Register() {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center flex justify-center items-center relative"
+      className="relative flex min-h-screen items-center justify-center bg-cover bg-center px-4 py-10"
       style={{
         backgroundImage: `url(${loginBg})`,
       }}
     >
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-slate-950/45"></div>
 
-      <div className="relative z-10 bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl p-10 w-full max-w-md">
+      <div className="relative z-10 w-full max-w-md rounded-2xl border border-white/70 bg-white/95 p-6 shadow-2xl shadow-slate-950/20 backdrop-blur sm:p-9">
 
         <div className="flex flex-col items-center mb-8">
 
-          <div className="bg-blue-600 p-5 rounded-full shadow-xl">
-            <FaPlaneDeparture className="text-white text-4xl" />
+          <div className="rounded-2xl bg-blue-600 p-4 shadow-md shadow-blue-900/20">
+            <FaPlaneDeparture className="text-3xl text-white" />
           </div>
 
-          <h2 className="text-xl text-blue-200 font-semibold mt-4">
+          <h2 className="mt-4 text-sm font-bold uppercase tracking-[0.16em] text-teal-700">
             TripGenius AI
           </h2>
 
-          <h1 className="text-4xl text-white font-bold mt-2">
+          <h1 className="mt-2 text-3xl font-extrabold text-slate-900 sm:text-4xl">
             Create Account
           </h1>
 
-          <p className="text-gray-200 text-center mt-3">
+          <p className="mt-3 text-center leading-6 text-slate-600">
             Join TripGenius AI and start planning smarter trips.
           </p>
 
@@ -90,10 +94,10 @@ function Register() {
 
           {/* Full Name */}
           <div>
-            <label className="text-white">Full Name</label>
+            <label className="text-sm font-semibold text-slate-700">Full Name</label>
 
             <div className="relative mt-2">
-              <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+              <FaUser className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-700" />
 
               <input
                 type="text"
@@ -101,7 +105,7 @@ function Register() {
                 value={formData.fullName}
                 onChange={handleChange}
                 placeholder="Enter your full name"
-                className="w-full pl-12 py-3 rounded-xl outline-none"
+                className="w-full rounded-xl border border-slate-300 py-3 pl-12 pr-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 required
               />
             </div>
@@ -109,10 +113,10 @@ function Register() {
 
           {/* Email */}
           <div>
-            <label className="text-white">Email</label>
+            <label className="text-sm font-semibold text-slate-700">Email</label>
 
             <div className="relative mt-2">
-              <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+              <FaEnvelope className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-700" />
 
               <input
                 type="email"
@@ -120,7 +124,7 @@ function Register() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="w-full pl-12 py-3 rounded-xl outline-none"
+                className="w-full rounded-xl border border-slate-300 py-3 pl-12 pr-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 required
               />
             </div>
@@ -128,10 +132,10 @@ function Register() {
 
           {/* Password */}
           <div>
-            <label className="text-white">Password</label>
+            <label className="text-sm font-semibold text-slate-700">Password</label>
 
             <div className="relative mt-2">
-              <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+              <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-700" />
 
               <input
                 type={showPassword ? "text" : "password"}
@@ -139,7 +143,7 @@ function Register() {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Create password"
-                className="w-full pl-12 pr-12 py-3 rounded-xl outline-none"
+                className="w-full rounded-xl border border-slate-300 py-3 pl-12 pr-12 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 required
               />
 
@@ -155,10 +159,10 @@ function Register() {
 
           {/* Confirm Password */}
           <div>
-            <label className="text-white">Confirm Password</label>
+            <label className="text-sm font-semibold text-slate-700">Confirm Password</label>
 
             <div className="relative mt-2">
-              <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+              <FaLock className="absolute left-4 top-1/2 -translate-y-1/2 text-teal-700" />
 
               <input
                 type={showConfirmPassword ? "text" : "password"}
@@ -166,7 +170,7 @@ function Register() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm password"
-                className="w-full pl-12 pr-12 py-3 rounded-xl outline-none"
+                className="w-full rounded-xl border border-slate-300 py-3 pl-12 pr-12 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 required
               />
 
@@ -187,7 +191,7 @@ function Register() {
           </div>
 
           {/* Terms */}
-          <label className="flex items-center gap-2 text-white text-sm">
+          <label className="flex items-center gap-2 text-sm text-slate-600">
             <input
               type="checkbox"
               name="terms"
@@ -203,19 +207,19 @@ function Register() {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-blue-600 py-3 rounded-xl text-white font-semibold hover:bg-blue-700 transition"
+            className="w-full rounded-xl bg-blue-600 py-3 font-bold text-white transition hover:bg-blue-700"
           >
             {submitting ? "Creating account..." : "Create Account"}
           </button>
 
         </form>
 
-        <p className="text-center text-white mt-6">
+        <p className="mt-6 text-center text-slate-600">
           Already have an account?
 
           <Link
             to="/login"
-            className="text-blue-300 ml-2 hover:underline"
+            className="ml-2 font-bold text-blue-700 hover:underline"
           >
             Login
           </Link>

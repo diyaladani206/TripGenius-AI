@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaCloudSun, FaTint, FaWind } from "react-icons/fa";
 import { getWeather } from "../services/weatherService";
 
 function WeatherCard({ destination }) {
@@ -32,10 +33,11 @@ function WeatherCard({ destination }) {
   }, [destination]);
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-6">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
-      <h2 className="text-2xl font-bold mb-6">
-        🌤 Current Weather
+      <h2 className="mb-6 flex items-center gap-3 text-xl font-bold text-slate-900">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-700"><FaCloudSun aria-hidden="true" /></span>
+        Current Weather
       </h2>
 
       {/* Loading */}
@@ -70,7 +72,7 @@ function WeatherCard({ destination }) {
 
             <div>
 
-              <p className="text-5xl font-bold text-blue-600">
+              <p className="text-4xl font-extrabold text-blue-700 sm:text-5xl">
                 {weather.temperature}°C
               </p>
 
@@ -86,26 +88,26 @@ function WeatherCard({ destination }) {
 
           <div className="grid grid-cols-2 gap-4">
 
-            <div className="bg-slate-50 p-4 rounded-xl">
+            <div className="rounded-xl bg-slate-50 p-4">
 
               <p className="text-gray-500 text-sm">
                 Humidity
               </p>
 
               <p className="font-bold text-lg">
-                💧 {weather.humidity}%
+                <FaTint className="mr-1 inline text-teal-700" aria-hidden="true" /> {weather.humidity}%
               </p>
 
             </div>
 
-            <div className="bg-slate-50 p-4 rounded-xl">
+            <div className="rounded-xl bg-slate-50 p-4">
 
               <p className="text-gray-500 text-sm">
                 Wind
               </p>
 
               <p className="font-bold text-lg">
-                🌬 {weather.wind} km/h
+                <FaWind className="mr-1 inline text-teal-700" aria-hidden="true" /> {weather.wind} km/h
               </p>
 
             </div>

@@ -1,19 +1,19 @@
 function Stats() {
   const stats = [
-    { number: "10K+", label: "Happy Travelers" },
-    { number: "150+", label: "Destinations" },
-    { number: "50+", label: "Countries" },
-    { number: "98%", label: "Customer Satisfaction" },
+    { number: "AI-Powered", label: "Smart trip planning" },
+    { number: "Global", label: "Destination discovery" },
+    { number: "Personalized", label: "Travel experiences" },
+    { number: "All in one", label: "Planning workspace" },
   ];
 
   return (
-    <section className="bg-blue-600 text-white py-16">
+    <section className="border-y border-slate-200 bg-white py-12 sm:py-14">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-9 text-center md:grid-cols-4 md:gap-8">
           {stats.map((stat) => (
             <div key={stat.label}>
-              <h2 className="text-4xl font-bold">{stat.number}</h2>
-              <p className="mt-2 text-lg">{stat.label}</p>
+              <h2 className="text-xl font-extrabold text-blue-700 sm:text-2xl">{stat.number}</h2>
+              <p className="mt-2 text-sm text-slate-600 sm:text-base">{stat.label}</p>
             </div>
           ))}
         </div>
