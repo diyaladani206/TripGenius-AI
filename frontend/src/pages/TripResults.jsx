@@ -6,9 +6,6 @@ import {
   FaCompass,
   FaUsers,
   FaWallet,
-  FaHotel,
-  FaUtensils,
-  FaCamera,
   FaHeart,
   FaPencilAlt,
   FaRobot,
@@ -19,6 +16,7 @@ import MapCard from "../components/MapCard";
 import BudgetCard from "../components/BudgetCard";
 import { saveTrip } from "../services/tripService";
 import DashboardNavbar from "../components/DashboardNavbar";
+import TripRecommendations from "../components/TripRecommendations";
 
 function TripResults() {
   const location = useLocation();
@@ -218,46 +216,7 @@ function TripResults() {
 
         </div>
 
-        {/* Recommendations */}
-        <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <FaHotel className="text-2xl text-teal-700" />
-
-            <h3 className="text-xl font-bold mt-4">
-              Hotels
-            </h3>
-
-            <p className="text-gray-500 mt-2">
-              AI hotel recommendations will appear here.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <FaUtensils className="text-2xl text-teal-700" />
-
-            <h3 className="text-xl font-bold mt-4">
-              Restaurants
-            </h3>
-
-            <p className="text-gray-500 mt-2">
-              Discover restaurants based on your preferences.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-            <FaCamera className="text-2xl text-teal-700" />
-
-            <h3 className="text-xl font-bold mt-4">
-              Attractions
-            </h3>
-
-            <p className="text-gray-500 mt-2">
-              Explore popular attractions and hidden gems.
-            </p>
-          </div>
-
-        </div>
+        <TripRecommendations destination={trip.destination} travelStyle={trip.travelStyle} />
       <div className="mt-8">
   <WeatherCard destination={trip.destination} />
 </div>
